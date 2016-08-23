@@ -3,3 +3,33 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.holder{
+  border: 2px dotted white;
+  height: 500px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+.panel{
+  height: 500px;
+  width: 300px;
+  background-color: rgba(0,0,0,0.75);
+  display: inline-block;
+  text-align: center;
+}
+
+.timer{
+  height: 100px;
+  width: 250px;
+  border: 1px dashed white;
+  margin: 10px auto 10px auto;
+}
+.wireTray{
+  height: 350px;
+  width: 250px;
+  border: 1px dashed white;
+  margin:auto;
+}
