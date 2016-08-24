@@ -1,7 +1,11 @@
 body{
-  background-image: url(img/simcity.jpg);
+  /*background-image: url(img/simcity.jpg);*/
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+img{
+  height: 350px;
 }
 
 .holder{
@@ -15,7 +19,7 @@ body{
 
 .panel{
   height: 500px;
-  width: 300px;
+  width: 250px;
   background-color: rgba(0,0,0,0.75);
   display: inline-block;
   text-align: center;
@@ -23,13 +27,18 @@ body{
 
 .timer{
   height: 100px;
-  width: 250px;
+  width: 225px;
   border: 1px dashed white;
   margin: 10px auto 10px auto;
 }
 .wireTray{
   height: 350px;
-  width: 250px;
+  width: 225px;
   border: 1px dashed white;
   margin:auto;
+}
+
+#status{
+  /*To be replaced with timer later*/
+  color: white;
 }
