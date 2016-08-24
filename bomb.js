@@ -9,28 +9,98 @@ document.getElementById("1").addEventListener('click',cutGreen);
 document.getElementById("2").addEventListener('click',cutRed);
 document.getElementById("3").addEventListener('click',cutWhite);
 document.getElementById("4").addEventListener('click',cutYellow);
-
+document.getElementById("reset").addEventListener('click',init);
 
 var wireState = [1,1,1,1,1]; //Tracks which wires are cut
 var trigger = [];//Tracks which are the trigger wires
-// var idArr = [];//Tracks ID to in order to mobilise trigger{} object later
-// var limit=0;//To sum Math.random() later, exceeding this number will trigger explosion
-// var rdArr = [];//Tracks assigned Math.random for later summer() use
+var start = false;
+var interval;
 
-// setTrigger();
 init();
 
 function init(){
+  console.log("Game initialised");
   var rdm, opp;
+  wireState = [1,1,1,1,1];
+  trigger = [];
+  var d3 = 3; //d3
+  var d2 = 0; //d2
+  var d1 = 0; //d1
+  var d0 = 0; //d0
   var x=document.querySelectorAll('img');
   x.forEach(function(img){
-    rdm = Math.floor(Math.random()*2);
-    trigger.push(rdm);
-    if(rdm===1){opp=0;}
-      else{opp=1;}
-
-    });
+      rdm = Math.floor(Math.random()*2);
+      trigger.push(rdm);
+      }
+    )
+ if(start === false){
+  timer(d3,d2,d1,d0);
+  start = true;
   }
+  else if(start===true){
+    clearInterval(interval);
+    start = false;
+  }
+    }
+
+function timer(d3,d2,d1,d0){
+
+       time = document.getElementById('status');
+      interval = setInterval(count,10);
+
+           function count(){
+             if((d3===0 && d2===0 && d1===0 && d0===0)){
+               clearInterval(interval);
+               document.body.style.backgroundImage="url('img/explosion.jpg')";
+               }
+               else{
+                  if(d0>0){
+                    d0--;
+                  }
+                  else{//Encasing else
+                    d0 = 9;
+                    if(d1>0){
+                     d1--;
+                    }
+                    else{
+                      d1=9;
+                      if(d2>0){
+                        d2--;
+                      }
+                      else{
+                        d2=9;
+                        if(d3>0){
+                          d3--;
+                        }
+                      }
+                    }
+                  }//end of encasing else
+                }
+               time.textContent = d3.toString() + d2.toString()+":"+d1.toString() + d0.toString();
+             }//end of count()
+       }//end of timer()
+
+function destiny(id){
+    /*This is the brain of this game, it decides whether the cut wire triggers the explosion*/
+    if(wireState.join('')==='00000'){
+      console.log('defused!');
+      alert("Bomb has been defused!")
+      init();
+    }
+    else if(trigger[id]===0 && wireState[id]===1){
+            console.log("Bomb is heating up! 750ms delay activated");
+            explode();
+            init();
+            wireState[id] = 0;
+          }
+          else if(trigger[id]===1 && wireState[id]===1){
+                wireState[id] = 0;
+                }
+   }
+
+function explode(){
+  document.body.style.backgroundImage="url('img/explosion.jpg')";
+}
 
 function cutBlue(){
   el = document.getElementById("0");
@@ -67,52 +137,3 @@ function cutYellow(){
   id = el.id;
   destiny(id);
 }
-
-function destiny(id){
-  if(wireState.join('')==='00000'){
-    console.log('defused!');
-    alert("Bomb has been defused!")
-    // clearTimeout(boom);
-  }
-  else if(trigger[id]===0 && wireState[id]===1){
-          console.log("Bomb is heating up! 750ms delay activated");
-          wireState[id] = 0;
-        }
-        else if(trigger[id]===1 && wireState[id]===1){
-              wireState[id] = 0;
-              }
- }
-
-
-// function summer(){ //Checks latest limit value
-//   limit = 0
-//   for(i=0; i<idArr.length; i++){
-//     limit+=trigger[idArr[i]];
-//   }
-// }
-
-//-----Experimental Codes----
-// function setTrigger(){
-//   var t;
-//     for(i=0; i<5; i++){
-//       t = (Math.floor(Math.random()*2));
-//       console.log(t);
-//       trigger.push(t);
-//     }
-// }
-
-
-
-
-// function bombState(id){
-//   cT = trigger[id]; //cT means checkTrigger
-//   if(cT===0){
-//     trigger[id] = 1;//sets trigger back to 1
-//     summer();
-//     console.log("Explode!");//Later to be replaced with delay750()
-//     }
-//   if(cT===1){
-//     trigger[id] = 0
-//     summer();
-//   }
-// }
