@@ -11,7 +11,7 @@ document.getElementById("3").addEventListener('click',cutWhite);
 document.getElementById("4").addEventListener('click',cutYellow);
 document.getElementById("reset").addEventListener('click',init);
 
-var wireState = [1,1,1,1,1]; //Tracks which wires are cut
+var wireTray = [1,1,1,1,1]; //Tracks which wires are cut
 var trigger = [];//Tracks which are the trigger wires
 var start = false;
 var interval;
@@ -21,8 +21,9 @@ init();
 function init(){
   console.log("Game initialised");
   var rdm, opp;
-  wireState = [1,1,1,1,1];
+  wireTray = [1,1,1,1,1];
   trigger = [];
+  document.getElementById('status').style.color="Red"
   var d3 = 3; //d3
   var d2 = 0; //d2
   var d1 = 0; //d1
@@ -43,12 +44,40 @@ function init(){
   }
     }
 
-function timer(d3,d2,d1,d0){
+function destiny(id){
+    /*This is the brain of this game, it decides whether the cut wire triggers the explosion*/
+
+    if(wireTray[id]===1){
+        if(trigger[id]===1){ //if player cuts good-wire
+          trigger[id]=0;
+          wireTray[id]=0;
+          }
+          else if(trigger[id]===0 && x === 0){
+            heatup();//
+            x++;
+          }
+      }
+
+    if(trigger.join('') === '00000'){
+      console.log('Bomb defused!');
+      alert("Bomb has been defused!")
+      document.getElementById('status').style.color="Green"
+      init();
+    }
+
+   }
+
+function timer(){
+
+        var d3 = 3; //d3
+        var d2 = 0; //d2
+        var d1 = 0; //d1
+        var d0 = 0; //d0
 
        time = document.getElementById('status');
-      interval = setInterval(count,10);
+       interval = setInterval(count,10);
 
-           function count(){
+       function count(){
              if((d3===0 && d2===0 && d1===0 && d0===0)){
                clearInterval(interval);
                document.body.style.backgroundImage="url('img/explosion.jpg')";
@@ -80,26 +109,13 @@ function timer(d3,d2,d1,d0){
              }//end of count()
        }//end of timer()
 
-function destiny(id){
-    /*This is the brain of this game, it decides whether the cut wire triggers the explosion*/
-    if(wireState.join('')==='00000'){
-      console.log('defused!');
-      alert("Bomb has been defused!")
-      init();
-    }
-    else if(trigger[id]===0 && wireState[id]===1){
-            console.log("Bomb is heating up! 750ms delay activated");
-            explode();
-            init();
-            wireState[id] = 0;
-          }
-          else if(trigger[id]===1 && wireState[id]===1){
-                wireState[id] = 0;
-                }
-   }
+function heatup(){
+    var bombStart = setTimeout(explode,750);
+    }//end of timer()
 
 function explode(){
   document.body.style.backgroundImage="url('img/explosion.jpg')";
+  clearInterval(interval);
 }
 
 function cutBlue(){
