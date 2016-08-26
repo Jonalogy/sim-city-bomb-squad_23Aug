@@ -32,6 +32,7 @@ function init(){
   var d0 = 0; //d0
   var x=document.querySelectorAll('img');
 
+  //Ensures at least 1 hotwire exists
   do{
     x.forEach(function(img){
         rdm = Math.floor(Math.random()*2);
@@ -42,7 +43,7 @@ function init(){
       check = 1;
     }
   }while(check=0)
-  console.log(trigger);
+  // console.log(trigger);
  if(start === false){
   timer(d3,d2,d1,d0);
   start = true;
@@ -132,7 +133,7 @@ function timer(d3,d2,d1,d0){
 
 function heatup(){
     bombStarted = true
-    var bombCountDown = setTimeout(explode,2000);
+    var bombCountDown = setTimeout(explode,750);//750ms
     }//end of timer()
 
 function explode(){
