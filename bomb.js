@@ -12,7 +12,7 @@ document.getElementById("4").addEventListener('click',cutYellow);
 document.getElementById("reset").addEventListener('click',reset);
 
 var wireTray = [1,1,1,1,1]; //Tracks which wires are cut
-var trigger = [];//Tracks which are the trigger wires
+var trigger;//Tracks which are the trigger wires
 var start = false;
 var bombStarted = false;
 var interval, bombCountDown;
@@ -24,17 +24,24 @@ function init(){
   var rdm, opp;
   wireTray = [1,1,1,1,1];
   trigger = [];
+  var check = 0;
   document.getElementById('status').style.color="Red"
   var d3 = 3; //d3
   var d2 = 0; //d2
   var d1 = 0; //d1
   var d0 = 0; //d0
   var x=document.querySelectorAll('img');
-  x.forEach(function(img){
-      rdm = Math.floor(Math.random()*2);
-      trigger.push(rdm);
-      }
-    )
+
+  do{
+    x.forEach(function(img){
+        rdm = Math.floor(Math.random()*2);
+        trigger.push(rdm);
+        }
+      )
+    if(trigger.join('')==='00000'){
+      check = 1;
+    }
+  }while(check=0)
   console.log(trigger);
  if(start === false){
   timer(d3,d2,d1,d0);
