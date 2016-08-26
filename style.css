@@ -9,7 +9,7 @@ img{
 }
 
 .holder{
-  border: 2px dotted white;
+  /*border: 2px dotted white;*/
   height: 500px;
   text-align: center;
   margin-left: auto;
@@ -28,13 +28,13 @@ img{
 .timer{
   height: 100px;
   width: 225px;
-  border: 1px dashed white;
+  /*border: 1px dashed white;*/
   margin: 10px auto 10px auto;
 }
 .wireTray{
   height: 350px;
   width: 225px;
-  border: 1px dashed white;
+  /*border: 1px dashed white;*/
   margin:auto;
 }
 
