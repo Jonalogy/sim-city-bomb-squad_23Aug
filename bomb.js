@@ -9,7 +9,7 @@ document.getElementById("1").addEventListener('click',cutGreen);
 document.getElementById("2").addEventListener('click',cutRed);
 document.getElementById("3").addEventListener('click',cutWhite);
 document.getElementById("4").addEventListener('click',cutYellow);
-document.getElementById("reset").addEventListener('click',init);
+document.getElementById("reset").addEventListener('click',reset);
 
 var wireTray = [1,1,1,1,1]; //Tracks which wires are cut
 var trigger = [];//Tracks which are the trigger wires
@@ -52,27 +52,45 @@ function destiny(id){
           trigger[id]=0;
           wireTray[id]=0;
           }
-          else if(trigger[id]===0 && x === 0){
+          else if(trigger[id]===0){
             heatup();//
-            x++;
           }
       }
 
     if(trigger.join('') === '00000'){
       console.log('Bomb defused!');
-      alert("Bomb has been defused!")
-      document.getElementById('status').style.color="Green"
-      init();
+      document.getElementById('status').style.color="Green";
+      clearInterval(interval);
     }
 
    }
 
-function timer(){
+function reset(){
+  start = false;
+    var el = document.getElementById("0");
+    el.src = "img/uncut-blue-wire.png";
 
-        var d3 = 3; //d3
-        var d2 = 0; //d2
-        var d1 = 0; //d1
-        var d0 = 0; //d0
+    el = document.getElementById("1");
+    el.src = "img/uncut-green-wire.png";
+
+    el = document.getElementById("2");
+    el.src = "img/uncut-red-wire.png";
+
+    el = document.getElementById("3");
+    el.src = "img/uncut-white-wire.png";
+
+    el = document.getElementById("4");
+    el.src = "img/uncut-yellow-wire.png";
+  init();
+
+}
+
+function timer(d3,d2,d1,d0){
+
+        // var d3 = 3; //d3
+        // var d2 = 0; //d2
+        // var d1 = 0; //d1
+        // var d0 = 0; //d0
 
        time = document.getElementById('status');
        interval = setInterval(count,10);
