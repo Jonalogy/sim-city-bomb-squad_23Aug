@@ -14,7 +14,8 @@ document.getElementById("reset").addEventListener('click',reset);
 var wireTray = [1,1,1,1,1]; //Tracks which wires are cut
 var trigger = [];//Tracks which are the trigger wires
 var start = false;
-var interval;
+var bombStarted = false;
+var interval, bombCountDown;
 
 init();
 
@@ -34,6 +35,7 @@ function init(){
       trigger.push(rdm);
       }
     )
+  console.log(trigger);
  if(start === false){
   timer(d3,d2,d1,d0);
   start = true;
@@ -61,27 +63,21 @@ function destiny(id){
       console.log('Bomb defused!');
       document.getElementById('status').style.color="Green";
       clearInterval(interval);
+      clearTimeout(bombCountDown);
     }
 
    }
 
 function reset(){
-  start = false;
-    var el = document.getElementById("0");
-    el.src = "img/uncut-blue-wire.png";
-
-    el = document.getElementById("1");
-    el.src = "img/uncut-green-wire.png";
-
-    el = document.getElementById("2");
-    el.src = "img/uncut-red-wire.png";
-
-    el = document.getElementById("3");
-    el.src = "img/uncut-white-wire.png";
-
-    el = document.getElementById("4");
-    el.src = "img/uncut-yellow-wire.png";
-  init();
+    clearInterval(interval);
+    start = false;
+    document.getElementById("0").src="img/uncut-blue-wire.png";
+    document.getElementById("1").src="img/uncut-green-wire.png";
+    document.getElementById("2").src="img/uncut-red-wire.png";
+    document.getElementById("3").src="img/uncut-white-wire.png";
+    document.getElementById("4").src="img/uncut-yellow-wire.png";
+    document.body.style.backgroundImage="url('img/simcity.jpg')";
+    init();
 
 }
 
@@ -128,7 +124,8 @@ function timer(d3,d2,d1,d0){
        }//end of timer()
 
 function heatup(){
-    var bombStart = setTimeout(explode,750);
+    bombStarted = true
+    var bombCountDown = setTimeout(explode,2000);
     }//end of timer()
 
 function explode(){
